@@ -68,4 +68,6 @@
 
 Github Repository URL: https://github.com/likelion-backendschool/bliond
 <br/>
-Lucid Chart (ERD) https://lucid.app/lucidchart/29f0c5de-3a28-43b0-82e2-cfb6e034557d/edit?invitationId=inv_eb77bb44-42f8-4c93-a955-09b26c1e90fb&page=ci8EUnqw_03n#
+Lucid Chart (ERD)
+
+![img](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNFW8ga-pTZ6z8d8kIP6shUnRwFT1vGChoq5ks7cu6j_evtfUUfzvtKY9sbfGPHiNo4i6RfQldjd68eAc1iOk0rM0sghJdlXWDi8dbLgX3BfdyC3D4dfvGxd0wiw-xM3p_BvcE_li81fPKWedB_nS9ooSixz3xmETSeErlD_jAjnPTeBgugsmKklEiIQ/w400-h391/Bliond_-_ERD.png)
