@@ -50,6 +50,12 @@
 
 Github Repository URL: [https://github.com/likelion-backendschool/bliond](https://github.com/likelion-backendschool/bliond)
 
-- 필수) 팀원들과 함께 찍은 인증샷(온라인 만남시 스크린 캡쳐)도 함께 업로드 해주세요 🙂
+
 
 [WBS](https://docs.google.com/spreadsheets/d/1S6HiQIrGL680Xy2h5iz_Rc4rD2nstenjXDsX2xpLk9k/edit#gid=0) 변화점 : 각 마일스톤으로 정하면 좋을 기능들을 분기로 설정해 두었다. 아직 정확하게 일정과 매칭은 못한 상태.
+
+📸 8월 9일 
+![0809](https://user-images.githubusercontent.com/27273017/184910611-c07a1d81-9610-48e2-8be4-278b3ccec4eb.png)
+
+📸 8월 10일 
+![0810](https://user-images.githubusercontent.com/27273017/184910626-e875951e-7401-42a3-89b1-04ed811e0156.png)
