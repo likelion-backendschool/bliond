@@ -1,5 +1,16 @@
 package com.likelion.bliond.domain;
 
-public enum Status {
-    STATUS_SLEEPER, STATUS_ACTIVE, STATUS_INACTIVE;
+public interface Status {
+
+    interface SLEEPER extends Status {
+
+    }
+
+    interface ACTIVE extends Status {
+
+    }
+
+    interface INACTIVE extends Status {
+
+    }
 }
