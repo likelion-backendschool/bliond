@@ -1,4 +1,4 @@
-package com.likelion.bliond.domain;
+package com.likelion.bliond.domain.member;
 
 public interface Role {
 
