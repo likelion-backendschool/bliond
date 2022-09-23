@@ -44,7 +44,6 @@ public class TokenService {
             .claim("username", memberContext.getUsername())
             .claim("id",memberContext.getId().toString())
             .claim(AUTHORITIES_KEY, authorities.get(0).getAuthority())
-            .claim("attributes", memberContext.getAttributes())
             .setExpiration(accessTokenExpiresIn) // payload "exp": 1516239022 (예시)
             .signWith(key, SignatureAlgorithm.HS512) // header "alg": "HS512"
             .compact();
@@ -107,5 +106,31 @@ public class TokenService {
             .parseClaimsJws(token)
             .getBody()
             .get("username", String.class);
+    }
+
+    public JwtDto generateTokenTest(String username, String id, String auth) {
+        long now = new Date().getTime();
+        Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+        String accessToken = Jwts.builder()
+            .claim("username", username)
+            .claim("id", id)
+            .claim(AUTHORITIES_KEY, auth)
+            .setExpiration(accessTokenExpiresIn) // payload "exp": 1516239022 (예시)
+            .signWith(key, SignatureAlgorithm.HS512) // header "alg": "HS512"
+            .compact();
+
+        log.info("accessToken: " + accessToken);
+
+//        String refreshToken = Jwts.builder()
+//            .setExpiration(new Date(now + REFRESH_TOKEN_EXPIRE_TIME))
+//            .signWith(key, SignatureAlgorithm.HS512)
+//            .compact();
+
+        return JwtDto.builder()
+            .accessToken(accessToken)
+//            .refreshToken(refreshToken)
+            .bearer_type(BEARER_TYPE)
+            .expiresIn(ACCESS_TOKEN_EXPIRE_TIME)
+            .build();
     }
 }

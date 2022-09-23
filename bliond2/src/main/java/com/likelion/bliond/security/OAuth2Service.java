@@ -28,6 +28,8 @@ public class OAuth2Service extends DefaultOAuth2UserService {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId().toUpperCase();
+        String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint()
+            .getUserNameAttributeName();
 
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
@@ -59,7 +61,7 @@ public class OAuth2Service extends DefaultOAuth2UserService {
         Set<GrantedAuthority> authorities = new LinkedHashSet<>();
         authorities.add(new SimpleGrantedAuthority(member.getRole().toString()));
 
-        return new MemberContext(member.getUsername(), member.getId(), authorities);
+        return new MemberContext(member.getUsername(), member.getId(), authorities, attributes, userNameAttributeName);
     }
 }
 

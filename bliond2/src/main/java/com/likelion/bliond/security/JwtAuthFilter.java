@@ -39,7 +39,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             Set<GrantedAuthority> grantedAuthorities = new LinkedHashSet<>();
             grantedAuthorities.add(new SimpleGrantedAuthority(authorities));
 
-            MemberContext memberContext = new MemberContext(username, id, grantedAuthorities);
+            MemberContext memberContext = new MemberContext(username, id, grantedAuthorities, null, null);
 
             UsernamePasswordAuthenticationToken authentication =
                 UsernamePasswordAuthenticationToken.authenticated(

@@ -11,14 +11,18 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 public class MemberContext extends User implements OAuth2User {
     private final Set<GrantedAuthority> authorities;
+    private final Map<String, Object> attributes;
+    private final String nameAttributeKey;
 
     @Getter
     private final Long id;
 
 
-    public MemberContext(String username, Long id, Set<GrantedAuthority> authorities) {
+    public MemberContext(String username, Long id, Set<GrantedAuthority> authorities, Map<String, Object> attributes, String nameAttributeKey) {
         super(username, "", authorities);
         this.authorities = authorities;
+        this.attributes = attributes;
+        this.nameAttributeKey = nameAttributeKey;
         this.id = id;
     }
 
@@ -29,11 +33,11 @@ public class MemberContext extends User implements OAuth2User {
 
     @Override
     public Map<String, Object> getAttributes() {
-        return null;
+        return this.attributes;
     }
 
     @Override
     public String getName() {
-        return null;
+        return this.getAttributes().get(this.nameAttributeKey).toString();
     }
 }
