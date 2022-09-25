@@ -1,8 +1,8 @@
 package com.likelion.bliond.web.member;
 
-import com.likelion.bliond.member.MemberDto;
-import com.likelion.bliond.member.MemberService;
-import com.likelion.bliond.web.ApiResponse;
+import com.likelion.bliond.domain.member.dto.MemberDto;
+import com.likelion.bliond.domain.member.service.MemberService;
+import com.likelion.bliond.web.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;

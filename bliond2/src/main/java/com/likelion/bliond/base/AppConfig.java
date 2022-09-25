@@ -4,8 +4,8 @@ import static org.modelmapper.convention.MatchingStrategies.STRICT;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.likelion.bliond.event.Event;
-import com.likelion.bliond.event.EventDto;
+import com.likelion.bliond.domain.event.dto.EventDto;
+import com.likelion.bliond.domain.event.entity.Event;
 import com.likelion.bliond.web.event.EventCreateVo;
 import com.likelion.bliond.web.event.EventVo;
 import org.modelmapper.ModelMapper;

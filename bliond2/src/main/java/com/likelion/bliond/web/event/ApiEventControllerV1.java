@@ -1,9 +1,9 @@
 package com.likelion.bliond.web.event;
 
-import com.likelion.bliond.event.EventDto;
-import com.likelion.bliond.event.EventService;
-import com.likelion.bliond.security.MemberContext;
-import com.likelion.bliond.web.ApiResponse;
+import com.likelion.bliond.domain.event.dto.EventDto;
+import com.likelion.bliond.domain.event.service.EventService;
+import com.likelion.bliond.security.context.MemberContext;
+import com.likelion.bliond.web.response.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

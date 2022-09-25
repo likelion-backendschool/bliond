@@ -10,10 +10,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.likelion.bliond.event.EventService;
-import com.likelion.bliond.member.Member;
-import com.likelion.bliond.member.MemberRepository;
-import com.likelion.bliond.security.TokenService;
+import com.likelion.bliond.domain.event.service.EventService;
+import com.likelion.bliond.domain.member.entity.Member;
+import com.likelion.bliond.domain.member.repository.MemberRepository;
+import com.likelion.bliond.util.TokenService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
