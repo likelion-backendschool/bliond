@@ -19,6 +19,6 @@ public class EventDto {
     private Boolean isPrivate;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-    private MemberDto member;
+    private MemberDto memberDto;
     private Long memberId;
 }

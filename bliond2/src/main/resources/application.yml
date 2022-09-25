@@ -1,4 +1,13 @@
 spring:
+  jpa:
+#    database-platform: org.hibernate.dialect.MariaDB53Dialect
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+    hibernate:
+      ddl-auto: create
   security:
     oauth2:
       client:
@@ -18,3 +27,8 @@ spring:
             user-name-attribute: id
 jwt:
   secret: token-secret-keyfsdafadsfdasfdasfdasfsdafasd32132132132132132132132132132132132132132132132132132132132
+
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: TRACE
+

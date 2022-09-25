@@ -50,7 +50,7 @@ public class MemberTest {
         memberRepository.save(member2);
 
         List<Member> members = memberRepository.findAll();
-        assertThat(members.size()).isEqualTo(2);
+        assertThat(members.size()).isGreaterThan(2);
     }
 
     @Test

@@ -1,7 +1,5 @@
 package com.likelion.bliond.web.event;
 
-import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,11 +7,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class EventCreateForm {
-
+public class EventVo {
+    private Long id;
     private String title;
-    private LocalDateTime endDateTime;
     private String description;
     private Boolean isPrivate;
+    private String endDateTime;
+    private String createdDate;
+    private String modifiedDate;
+    private Long memberId;
+    private String username;
+    private String nickname;
 }

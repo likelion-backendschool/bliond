@@ -10,12 +10,16 @@ import com.likelion.bliond.web.ApiException;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.transaction.Transactional;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Transactional
+@TestInstance(Lifecycle.PER_CLASS)
 public class EventServiceTest {
 
     @Autowired
@@ -23,19 +27,23 @@ public class EventServiceTest {
     @Autowired
     private MemberRepository memberRepository;
 
+    Member member;
+
+    @BeforeAll
+    public void beforeAll() {
+        member = memberRepository.findByUsername("KAKAO_12345").get();
+    }
+
     @Test
     public void create() {
         // given
-        Member member = Member.builder()
-            .username("test").build();
-        Member member1 = memberRepository.save(member);
 
         EventDto eventDto = new EventDto();
         eventDto.setTitle("test");
         eventDto.setDescription("testDescription");
         eventDto.setEndDateTime(LocalDateTime.now().plusDays(1));
         eventDto.setIsPrivate(true);
-        eventDto.setMemberId(member1.getId());
+        eventDto.setMemberId(member.getId());
         // when
         Long eventId = eventService.save(eventDto);
 
@@ -52,12 +60,14 @@ public class EventServiceTest {
         eventDto1.setDescription("testDescription1");
         eventDto1.setEndDateTime(LocalDateTime.now().plusDays(1));
         eventDto1.setIsPrivate(true);
+        eventDto1.setMemberId(member.getId());
 
         EventDto eventDto2 = new EventDto();
         eventDto2.setTitle("test2");
         eventDto2.setDescription("testDescription2");
         eventDto2.setEndDateTime(LocalDateTime.now().plusDays(2));
         eventDto2.setIsPrivate(false);
+        eventDto2.setMemberId(member.getId());
 
         eventService.save(eventDto1);
         eventService.save(eventDto2);
@@ -74,10 +84,12 @@ public class EventServiceTest {
         eventDto.setTitle("test");
         eventDto.setDescription("testDescription");
         eventDto.setEndDateTime(LocalDateTime.now().plusDays(1));
+        eventDto.setMemberId(member.getId());
         eventDto.setIsPrivate(true);
 
-        Long eventId = eventService.save(eventDto);
 
+        Long eventId = eventService.save(eventDto);
+        eventDto.setId(eventId);
         // when
         EventDto findEventDto = eventService.findById(eventId);
         findEventDto.setTitle("updateTitle");
@@ -96,6 +108,7 @@ public class EventServiceTest {
         eventDto.setDescription("testDescription");
         eventDto.setEndDateTime(LocalDateTime.now().plusDays(1));
         eventDto.setIsPrivate(true);
+        eventDto.setMemberId(member.getId());
 
 
         Long eventId = eventService.save(eventDto);

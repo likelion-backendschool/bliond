@@ -39,12 +39,17 @@ public class EventService {
 
     @Transactional
     public void update(EventDto eventDto) {
-        Event event = eventRepository.findById(eventDto.getId()).get();
+        Event event = eventRepository.findById(eventDto.getId()).orElseThrow(() -> new ApiException("존재하지 않는 이벤트입니다."));
+
+        eventRepository.findByIdAndMemberId(event.getId(), eventDto.getMemberId())
+            .orElseThrow(() -> new ApiException("이벤트에 대한 수정 권한이 없습니다."));
+
         mapper.map(eventDto, event);
     }
 
     @Transactional
     public void deleteById(Long eventId) {
+        findById(eventId);
         eventRepository.deleteById(eventId);
     }
 }

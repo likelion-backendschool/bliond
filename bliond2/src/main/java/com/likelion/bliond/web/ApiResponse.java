@@ -33,4 +33,8 @@ public class ApiResponse<T> {
         result.add(data);
         return new ApiResponse<>(CREATED.value(), result);
     }
+
+    public static <T> ApiResponse<T> noContent() {
+        return new ApiResponse<>(OK.value(), null);
+    }
 }

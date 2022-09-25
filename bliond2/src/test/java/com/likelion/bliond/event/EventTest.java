@@ -2,20 +2,35 @@ package com.likelion.bliond.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.likelion.bliond.member.Member;
+import com.likelion.bliond.member.MemberRepository;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.transaction.Transactional;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @Transactional
 @SpringBootTest
+@TestInstance(Lifecycle.PER_CLASS)
 class EventTest {
 
     @Autowired
     EventRepository eventRepository;
+
+    @Autowired
+    public MemberRepository memberRepository;
+
+    Member member;
+    @BeforeAll
+    public void beforeAll() {
+        member = memberRepository.findByUsername("KAKAO_12345").get();
+    }
 
     @Test
     void create() {
@@ -24,6 +39,7 @@ class EventTest {
             .title("test")
             .description("test")
             .isPrivate(true)
+            .member(member)
             .build();
         eventRepository.save(event);
 
@@ -39,12 +55,14 @@ class EventTest {
             .title("test")
             .description("test")
             .isPrivate(false)
+            .member(member)
             .build();
         Event event2 = Event.builder()
             .endDateTime(LocalDateTime.now().plus(3, ChronoUnit.HOURS))
             .title("test2")
             .description("test2")
             .isPrivate(true)
+            .member(member)
             .build();
 
         eventRepository.save(event1);
@@ -61,6 +79,7 @@ class EventTest {
             .title("test")
             .description("test")
             .isPrivate(false)
+            .member(member)
             .build();
         Event savedEvent = eventRepository.save(event);
 
@@ -78,6 +97,7 @@ class EventTest {
             .title("test")
             .description("test")
             .isPrivate(false)
+            .member(member)
             .build();
         eventRepository.save(event);
 
