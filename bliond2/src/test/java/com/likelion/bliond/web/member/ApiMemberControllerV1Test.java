@@ -42,10 +42,9 @@ class ApiMemberControllerV1Test {
     @Test
     void read() throws Exception {
         Member member = memberRepository.findByUsername("KAKAO_54321").get();
-        Long id = member.getId();
         String accessToken = member.getAccessToken();
         ResultActions resultActions = mvc.perform(
-                get("/api/v1/members/%d".formatted(id))
+                get("/api/v1/member")
                     .contentType(APPLICATION_JSON)
                     .header(AUTHORIZATION, "Bearer " + accessToken)
                     .accept(APPLICATION_JSON))

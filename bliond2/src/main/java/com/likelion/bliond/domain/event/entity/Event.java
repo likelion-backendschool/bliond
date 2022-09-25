@@ -1,5 +1,6 @@
 package com.likelion.bliond.domain.event.entity;
 
+import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -7,11 +8,17 @@ import com.likelion.bliond.base.BaseEntity;
 import com.likelion.bliond.base.BooleanToYNConverter;
 import com.likelion.bliond.domain.member.entity.Member;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,7 +46,22 @@ public class Event extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     private Member member;
 
+    @Builder.Default
+    @OneToMany(mappedBy = "event", cascade = PERSIST, orphanRemoval = true)
+    private Set<EventMember> eventMembers = new HashSet<>();
+    public void participate(Member member) {
+        EventMember eventMember = EventMember.builder()
+                .event(this)
+                .member(member)
+                .build();
+        this.eventMembers.add(eventMember);
+    }
 
-//    @OneToMany
-//    private List<EventMember> eventMemberList;
+    public void leave(Member member) {
+        EventMember eventMember = EventMember.builder()
+                .event(this)
+                .member(member)
+                .build();
+        this.eventMembers.remove(eventMember);
+    }
 }

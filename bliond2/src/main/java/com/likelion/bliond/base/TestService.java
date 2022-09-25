@@ -58,4 +58,16 @@ public class TestService {
 
         return events;
     }
+
+    public Event createEventMember() {
+        Member member1 = memberRepository.findByUsername("KAKAO_12345").get();
+        Member member2 = memberRepository.findByUsername("KAKAO_23456").get();
+        Member member3 = memberRepository.findByUsername("KAKAO_34567").get();
+        Event event = createEvent(member1.getId(), 1).get(0);
+
+        event.participate(member2);
+        event.participate(member3);
+
+        return event;
+    }
 }

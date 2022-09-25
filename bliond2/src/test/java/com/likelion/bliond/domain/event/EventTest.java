@@ -2,6 +2,7 @@ package com.likelion.bliond.domain.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.likelion.bliond.base.TestService;
 import com.likelion.bliond.domain.event.entity.Event;
 import com.likelion.bliond.domain.event.repository.EventRepository;
 import com.likelion.bliond.domain.member.entity.Member;
@@ -22,6 +23,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @TestInstance(Lifecycle.PER_CLASS)
 class EventTest {
 
+    @Autowired
+    TestService testService;
     @Autowired
     EventRepository eventRepository;
 
@@ -107,5 +110,20 @@ class EventTest {
 
         Event deletedEvent = eventRepository.findById(event.getId()).orElse(null);
         assertThat(deletedEvent).isNull();
+    }
+
+    @Test
+    void participate() {
+        Event event = testService.createEvent(member.getId(), 1).get(0);
+        event.participate(member);
+        assertThat(event.getEventMembers().size()).isEqualTo(1);
+    }
+
+    @Test
+    void leave() {
+        Member member = memberRepository.findByUsername("KAKAO_34567").get();
+        Event event = testService.createEventMember();
+        event.leave(member);
+        assertThat(event.getEventMembers().size()).isEqualTo(1);
     }
 }

@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,18 +27,12 @@ public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
     @Enumerated(STRING)
     private AuthType authType;
-
     private String authKey;
-    // TODO repository 수정
     private String username;
-
     private String nickname;
-
     @Enumerated(STRING)
     private Role role;
-
     private String accessToken;
 }
