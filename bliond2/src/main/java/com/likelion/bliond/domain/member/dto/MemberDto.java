@@ -19,4 +19,5 @@ public class MemberDto {
     private String nickname;
     private Role role;
     private String accessToken;
+    private String eventNickname;
 }

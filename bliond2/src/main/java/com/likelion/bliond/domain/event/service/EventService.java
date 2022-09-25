@@ -16,9 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class EventService {
+
     private final ModelMapper mapper;
     private final EventRepository eventRepository;
     private final MemberRepository memberRepository;
+
     @Transactional
     public Long save(EventDto eventDto) {
         Event event = mapper.map(eventDto, Event.class);
@@ -54,5 +56,18 @@ public class EventService {
     public void deleteById(Long eventId) {
         findById(eventId);
         eventRepository.deleteById(eventId);
+    }
+
+    @Transactional
+    public void participate(Long eventId, Long memberId) {
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new ApiException("존재하지 않는 이벤트입니다."));
+        Member member = memberRepository.findById(memberId).orElseThrow(() -> new ApiException("존재하지 않는 사용자입니다."));
+        event.participate(member);
+    }
+
+    public void leave(Long eventId, Long memberId) {
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new ApiException("존재하지 않는 이벤트입니다."));
+        Member member = memberRepository.findById(memberId).orElseThrow(() -> new ApiException("존재하지 않는 사용자입니다."));
+        event.leave(member);
     }
 }

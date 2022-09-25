@@ -98,4 +98,22 @@ public class EventServiceTest {
             .isThrownBy(() -> eventService.findById(event.getId()))
             .withMessageMatching("존재하지 않는 이벤트입니다.");
     }
+
+    @Test
+    public void participate() {
+        Event event = testService.createEvent(member.getId(), 1).get(0);
+        Member member = memberRepository.findByUsername("KAKAO_23456").get();
+
+        eventService.participate(event.getId(), member.getId());
+        assertThat(event.getEventMembers().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void leave() {
+        Long eventId = testService.createEventMember().getId();
+        Long memberId = memberRepository.findByUsername("KAKAO_23456").get().getId();
+
+        eventService.leave(eventId, memberId);
+        assertThat(eventService.findById(eventId).getParticipants().size()).isEqualTo(1);
+    }
 }

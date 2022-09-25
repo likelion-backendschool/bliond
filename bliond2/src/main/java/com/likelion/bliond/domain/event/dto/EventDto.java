@@ -2,6 +2,7 @@ package com.likelion.bliond.domain.event.dto;
 
 import com.likelion.bliond.domain.member.dto.MemberDto;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,5 @@ public class EventDto {
     private LocalDateTime modifiedDate;
     private MemberDto memberDto;
     private Long memberId;
+    private List<MemberDto> participants;
 }

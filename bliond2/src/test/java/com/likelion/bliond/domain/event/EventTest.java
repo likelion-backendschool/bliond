@@ -115,7 +115,9 @@ class EventTest {
     @Test
     void participate() {
         Event event = testService.createEvent(member.getId(), 1).get(0);
-        event.participate(member);
+        Member member2 = memberRepository.findByUsername("KAKAO_34567").get();
+        event.participate(member2);
+
         assertThat(event.getEventMembers().size()).isEqualTo(1);
     }
 
