@@ -38,4 +38,8 @@ public class Event extends BaseEntity {
 
     @ManyToOne(fetch = LAZY)
     private Member member;
+
+
+//    @OneToMany
+//    private List<EventMember> eventMemberList;
 }

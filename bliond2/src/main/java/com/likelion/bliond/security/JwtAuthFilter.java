@@ -34,12 +34,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (tokenService.verifyToken(token)) {
             String username = tokenService.getUsername(token);
             Long id = Long.valueOf(tokenService.getId(token));
+            String nickname = tokenService.getNickname(token);
 
             String authorities = tokenService.getAuthorities(token);
             Set<GrantedAuthority> grantedAuthorities = new LinkedHashSet<>();
             grantedAuthorities.add(new SimpleGrantedAuthority(authorities));
 
-            MemberContext memberContext = new MemberContext(username, id, grantedAuthorities, null, null);
+            MemberContext memberContext =
+                new MemberContext(username, nickname, id,  grantedAuthorities, null, null);
 
             UsernamePasswordAuthenticationToken authentication =
                 UsernamePasswordAuthenticationToken.authenticated(

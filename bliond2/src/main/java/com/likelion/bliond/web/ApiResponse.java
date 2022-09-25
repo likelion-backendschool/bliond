@@ -22,6 +22,11 @@ public class ApiResponse<T> {
     public static <T> ApiResponse<T> ok(List<T> data) {
         return new ApiResponse<>(OK.value(), data);
     }
+    public static <T> ApiResponse<T> ok(T data) {
+        List<T> result = new ArrayList<>();
+        result.add(data);
+        return new ApiResponse<>(OK.value(), result);
+    }
 
     public static <T> ApiResponse<T> created(T data) {
         List<T> result = new ArrayList<>();

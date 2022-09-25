@@ -1,6 +1,5 @@
 package com.likelion.bliond.web.event;
 
-import com.likelion.bliond.member.MemberDto;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +18,7 @@ public class EventCreateVo {
     private LocalDateTime endDateTime;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-    private MemberDto memberDto;
     private Long memberId;
+    private String username;
+    private String nickname;
 }

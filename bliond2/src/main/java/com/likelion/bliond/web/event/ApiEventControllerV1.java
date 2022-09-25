@@ -24,6 +24,7 @@ public class ApiEventControllerV1 {
     private final ModelMapper mapper;
     private final EventService eventService;
 
+    // TODO member controller, service, repository 가 완성이 안되어서 멈추어진 상태
     @PostMapping
     public ApiResponse<EventCreateVo> save(@RequestBody EventCreateForm eventCreateForm, @AuthenticationPrincipal
         MemberContext memberContext) {

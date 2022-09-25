@@ -1,4 +1,4 @@
-package com.likelion.bliond.web;
+package com.likelion.bliond.web.event;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -13,11 +13,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.likelion.bliond.event.EventDto;
 import com.likelion.bliond.event.EventService;
+import com.likelion.bliond.member.AuthType;
 import com.likelion.bliond.member.Member;
 import com.likelion.bliond.member.MemberRepository;
 import com.likelion.bliond.security.JwtDto;
 import com.likelion.bliond.security.TokenService;
-import com.likelion.bliond.web.event.EventCreateForm;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,7 +51,7 @@ public class ApiEventControllerV1Test {
 
     @BeforeEach
     void beforeEach() {
-        jwtDto = tokenService.generateTokenTest("test", "1", "ROLE_USER");
+        jwtDto = tokenService.generateTokenTest(AuthType.KAKAO+ "_1234", "1", "ROLE_USER", "user1");
     }
 
     @Test

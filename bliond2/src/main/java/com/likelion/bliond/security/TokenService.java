@@ -64,20 +64,19 @@ public class TokenService {
     }
 
     public boolean verifyToken(String token) {
-        boolean isTokenValid = false;
         try {
             Jws<Claims> claims = Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token);
             log.info("claims: " + claims);
-            isTokenValid = true;
+            return true;
         } catch (Exception e) {
             log.error("Invalid JWT token");
             log.error("Invalid JWT token trace: " + e.getMessage());
         }
 
-        return isTokenValid;
+        return false;
     }
 
     public String getId(String token) {
@@ -108,12 +107,22 @@ public class TokenService {
             .get("username", String.class);
     }
 
-    public JwtDto generateTokenTest(String username, String id, String auth) {
+    public String getNickname(String token) {
+        return Jwts.parserBuilder()
+            .setSigningKey(key)
+            .build()
+            .parseClaimsJws(token)
+            .getBody()
+            .get("nickname", String.class);
+    }
+
+    public JwtDto generateTokenTest(String username, String id, String auth, String nickname) {
         long now = new Date().getTime();
         Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
         String accessToken = Jwts.builder()
             .claim("username", username)
             .claim("id", id)
+            .claim("nickname", nickname)
             .claim(AUTHORITIES_KEY, auth)
             .setExpiration(accessTokenExpiresIn) // payload "exp": 1516239022 (예시)
             .signWith(key, SignatureAlgorithm.HS512) // header "alg": "HS512"

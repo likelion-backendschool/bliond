@@ -12,10 +12,12 @@ import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
+@Setter
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
@@ -32,6 +34,10 @@ public class Member extends BaseEntity {
     // TODO repository 수정
     private String username;
 
+    private String nickname;
+
     @Enumerated(STRING)
     private Role role;
+
+    private String accessToken;
 }

@@ -1,5 +1,8 @@
 package com.likelion.bliond.security;
 
+import com.likelion.bliond.member.Member;
+import com.likelion.bliond.member.MemberRepository;
+import com.likelion.bliond.web.ApiException;
 import java.io.IOException;
 import java.util.Optional;
 import javax.servlet.http.Cookie;
@@ -15,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Component
 public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final TokenService tokenService;
+    private final MemberRepository memberRepository;
     private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
     @Override
@@ -37,6 +41,12 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
         JwtDto jwtDto = tokenService.generateToken(memberContext);
+
+        Member member = memberRepository.findById(memberContext.getId())
+            .orElseThrow(() -> new ApiException("사용자를 찾을 수 없습니다."));
+
+        member.setAccessToken(jwtDto.getAccessToken());
+
         return UriComponentsBuilder.fromUriString(targetUrl)
             .queryParam("accessToken", jwtDto.getAccessToken())
 //            .queryParam("refreshToken", jwtDto.getRefreshToken())

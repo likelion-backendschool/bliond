@@ -1,4 +1,4 @@
-package com.likelion.bliond.member;
+package com.likelion.bliond.web.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,12 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberDto {
+public class MemberDetailVo {
     private Long id;
-    private AuthType authType; // KAKAO
-    private String authKey;
     private String username;
     private String nickname;
-    private Role role;
-    private String accessToken;
 }

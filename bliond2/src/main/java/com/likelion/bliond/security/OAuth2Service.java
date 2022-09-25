@@ -37,8 +37,12 @@ public class OAuth2Service extends DefaultOAuth2UserService {
         if ("KAKAO".equals(registrationId)) {
             Long id = (Long) attributes.get("id");
             String username = "KAKAO_%d".formatted(id);
+            Map<String, Object> kakao_account = (Map<String, Object>) attributes.get("kakao_account");
+            Map<String, Object> profile = (Map<String, Object>) kakao_account.get("profile");
+            String nickname = (String) profile.get("nickname");
 
-            boolean isExits = memberRepository.findByUsername(username).isPresent();
+            boolean isExits = memberRepository
+                .findByUsername(username).isPresent();
 
 
             if (isExits) {
@@ -49,6 +53,7 @@ public class OAuth2Service extends DefaultOAuth2UserService {
                     Member.builder()
                         .authType(AuthType.KAKAO)
                         .username("KAKAO_%d".formatted(id))
+                        .nickname(nickname)
                         .role(ROLE_USER)
                         .authKey(id.toString())
                         .build()
@@ -61,7 +66,7 @@ public class OAuth2Service extends DefaultOAuth2UserService {
         Set<GrantedAuthority> authorities = new LinkedHashSet<>();
         authorities.add(new SimpleGrantedAuthority(member.getRole().toString()));
 
-        return new MemberContext(member.getUsername(), member.getId(), authorities, attributes, userNameAttributeName);
+        return new MemberContext(member.getUsername(), member.getNickname(), member.getId(), authorities, attributes, userNameAttributeName);
     }
 }
 

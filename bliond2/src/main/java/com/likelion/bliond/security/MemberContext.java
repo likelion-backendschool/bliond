@@ -17,13 +17,17 @@ public class MemberContext extends User implements OAuth2User {
     @Getter
     private final Long id;
 
+    @Getter
+    private final String nickname;
 
-    public MemberContext(String username, Long id, Set<GrantedAuthority> authorities, Map<String, Object> attributes, String nameAttributeKey) {
+
+    public MemberContext(String username, String nickname, Long id, Set<GrantedAuthority> authorities, Map<String, Object> attributes, String nameAttributeKey) {
         super(username, "", authorities);
         this.authorities = authorities;
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
         this.id = id;
+        this.nickname = nickname;
     }
 
     @Override
