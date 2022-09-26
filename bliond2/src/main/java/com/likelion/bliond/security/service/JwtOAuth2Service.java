@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class OAuth2Service extends DefaultOAuth2UserService {
+public class JwtOAuth2Service extends DefaultOAuth2UserService {
     private final MemberRepository memberRepository;
 
     @Override
