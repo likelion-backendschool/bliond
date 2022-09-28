@@ -22,6 +22,7 @@ public class AppConfig {
         mapper.typeMap(Event.class, EventDto.class).addMappings(m -> {
             m.map(Event::getMember, EventDto::setMemberDto);
             m.map(source -> source.getMember().getId(), EventDto::setMemberId);
+            m.using(new EventMemberSetConverter()).map(Event::getEventMembers, EventDto::setParticipants);
         });
         mapper.typeMap(EventDto.class, EventCreateVo.class).addMappings(m -> {
             m.map(source -> source.getMemberDto().getId(), EventCreateVo::setMemberId);
@@ -32,6 +33,7 @@ public class AppConfig {
             m.map(source -> source.getMemberDto().getId(), EventVo::setMemberId);
             m.map(source -> source.getMemberDto().getUsername(), EventVo::setUsername);
             m.map(source -> source.getMemberDto().getNickname(), EventVo::setNickname);
+            m.map(EventDto::getParticipants, EventVo::setParticipants);
         });
         return mapper;
     }

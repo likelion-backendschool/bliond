@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/member")
 public class ApiMemberControllerV1 {
 
+    //TODO EventMember에서 eventMemberNickname 받아오기(교체)
+
     private final MemberService memberService;
 
     private final ModelMapper mapper;

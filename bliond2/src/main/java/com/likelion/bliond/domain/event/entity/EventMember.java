@@ -31,4 +31,5 @@ public class EventMember extends BaseEntity {
     private Event event;
     @ManyToOne(fetch = LAZY)
     private Member member;
+    private String eventNickname;
 }

@@ -1,5 +1,6 @@
 package com.likelion.bliond.web.event;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,4 +19,5 @@ public class EventVo {
     private Long memberId;
     private String username;
     private String nickname;
+    private List<EventMemberVo> participants;
 }
