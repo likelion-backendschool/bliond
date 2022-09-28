@@ -5,6 +5,7 @@ import com.likelion.bliond.domain.event.entity.Event;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import net.bytebuddy.implementation.bind.annotation.SuperCall;
 
@@ -18,6 +19,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @SuperBuilder
 @NoArgsConstructor
 @Getter
+@Setter
 public class Poll extends BaseEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)

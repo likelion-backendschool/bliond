@@ -16,6 +16,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 @Transactional
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -49,11 +53,11 @@ public class PollTest {
 
         Poll savedPoll = pollRepository.save(poll);
 
-        Poll findPoll = pollRepository.findById(savedPoll.getId()).get();
+        Poll foundPoll = pollRepository.findById(savedPoll.getId()).get();
 
-        Assertions.assertThat(findPoll.getName()).isEqualTo(poll.getName());
-        Assertions.assertThat(findPoll.getDescription()).isEqualTo(poll.getDescription());
-        Assertions.assertThat(findPoll.getPollChoices().size()).isEqualTo(3);
+        Assertions.assertThat(foundPoll.getName()).isEqualTo(poll.getName());
+        Assertions.assertThat(foundPoll.getDescription()).isEqualTo(poll.getDescription());
+        Assertions.assertThat(foundPoll.getPollChoices().size()).isEqualTo(3);
     }
 
     /** 22시까지
@@ -62,4 +66,75 @@ public class PollTest {
      * delete(poll 삭제)
      * pollChoice 개별 삭제에 대한 건 나중에
      * */
+
+    @Test
+    void update(){
+        Event event = testService.createEvent(member.getId(),1).get(0);
+        Poll poll = Poll.builder()
+                .name("만족도 조사")
+                .description("...에 대한 만족도 조사")
+                .event(event)
+                .isActive(true)
+                .build();
+
+        poll.addPollChoice("매우 만족");
+        poll.addPollChoice("만족");
+        poll.addPollChoice("불만족");
+
+        Poll savedPoll = pollRepository.save(poll);
+
+        savedPoll.setName("만족도 조사 : 하나 고르시오");
+        savedPoll.setIsActive(false);
+
+        Poll foundPoll = pollRepository.findById(savedPoll.getId()).get();
+
+        Assertions.assertThat(foundPoll.getName()).isEqualTo(poll.getName());
+        Assertions.assertThat(foundPoll.getIsActive()).isEqualTo(false);
+    }
+
+    @Test
+    void delete(){
+        Event event = testService.createEvent(member.getId(),1).get(0);
+        Poll poll = Poll.builder()
+                .name("만족도 조사")
+                .description("...에 대한 만족도 조사")
+                .event(event)
+                .isActive(true)
+                .build();
+
+        poll.addPollChoice("매우 만족");
+        poll.addPollChoice("만족");
+        poll.addPollChoice("불만족");
+
+        pollRepository.save(poll);
+
+        pollRepository.deleteById(poll.getId());
+
+        Poll deletedPoll = pollRepository.findById(poll.getId()).orElse(null);
+        assertThat(deletedPoll).isNull();
+    }
+
+    @Test
+    void read(){
+        Event event = testService.createEvent(member.getId(),1).get(0);
+        Poll poll1 = Poll.builder()
+                .name("질문1")
+                .description("답을 맞추시오1")
+                .event(event)
+                .isActive(true)
+                .build();
+        Poll poll2 = Poll.builder()
+                .name("질문2")
+                .description("답을 맞추시오2")
+                .event(event)
+                .isActive(true)
+                .build();
+
+        pollRepository.save(poll1);
+        pollRepository.save(poll2);
+
+        List<Poll> polls = pollRepository.findAll();
+        assertThat(polls.size()).isEqualTo(2);
+
+    }
 }
