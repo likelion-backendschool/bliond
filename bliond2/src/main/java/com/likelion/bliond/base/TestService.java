@@ -7,6 +7,7 @@ import com.likelion.bliond.domain.event.repository.EventRepository;
 import com.likelion.bliond.domain.member.entity.Member;
 import com.likelion.bliond.domain.member.entity.Role;
 import com.likelion.bliond.domain.member.repository.MemberRepository;
+import com.likelion.bliond.domain.poll.entity.Poll;
 import com.likelion.bliond.util.JwtDto;
 import com.likelion.bliond.util.TokenService;
 import java.time.LocalDateTime;
@@ -70,4 +71,5 @@ public class TestService {
 
         return event;
     }
+
 }

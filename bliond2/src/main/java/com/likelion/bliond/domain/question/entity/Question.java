@@ -1,4 +1,4 @@
-package com.likelion.bliond.domain.question;
+package com.likelion.bliond.domain.question.entity;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;

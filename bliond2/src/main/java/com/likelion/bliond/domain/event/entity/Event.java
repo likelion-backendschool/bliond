@@ -9,6 +9,7 @@ import com.likelion.bliond.base.BooleanToYNConverter;
 import com.likelion.bliond.domain.member.entity.Member;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.likelion.bliond.domain.question.entity.Question;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,6 +46,9 @@ public class Event extends BaseEntity {
 
     @ManyToOne(fetch = LAZY)
     private Member member;
+
+    @OneToMany(mappedBy = "event")
+    private List<Question> questions;
 
     @Builder.Default
     @OneToMany(mappedBy = "event", cascade = PERSIST, orphanRemoval = true)
