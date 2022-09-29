@@ -7,16 +7,20 @@ import static lombok.AccessLevel.PROTECTED;
 import com.likelion.bliond.base.BaseEntity;
 import com.likelion.bliond.domain.event.entity.Event;
 import com.likelion.bliond.domain.member.entity.Member;
-
-import javax.persistence.*;
-
-import lombok.*;
-import lombok.experimental.SuperBuilder;
-import org.springframework.data.annotation.CreatedDate;
-
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter

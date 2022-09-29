@@ -1,19 +1,21 @@
 package com.likelion.bliond.domain.question;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.TestInstance.Lifecycle.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 
-import com.likelion.bliond.base.*;
-import com.likelion.bliond.domain.event.entity.*;
-import com.likelion.bliond.domain.event.repository.*;
-import com.likelion.bliond.domain.member.entity.*;
-import com.likelion.bliond.domain.member.repository.*;
-import com.likelion.bliond.domain.question.dto.*;
-import com.likelion.bliond.domain.question.service.*;
-import java.util.*;
-import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.test.context.*;
+import com.likelion.bliond.base.TestService;
+import com.likelion.bliond.domain.event.entity.Event;
+import com.likelion.bliond.domain.event.repository.EventRepository;
+import com.likelion.bliond.domain.member.entity.Member;
+import com.likelion.bliond.domain.member.repository.MemberRepository;
+import com.likelion.bliond.domain.question.dto.QuestionDto;
+import com.likelion.bliond.domain.question.service.QuestionService;
+import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @TestInstance(PER_CLASS)

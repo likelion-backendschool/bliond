@@ -2,13 +2,16 @@ package com.likelion.bliond.domain.poll.entity;
 
 
 import com.likelion.bliond.base.BaseEntity;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.util.Lazy;
-
-import javax.persistence.*;
 
 @SuperBuilder
 @Entity

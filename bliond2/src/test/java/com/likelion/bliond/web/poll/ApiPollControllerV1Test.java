@@ -1,10 +1,10 @@
 package com.likelion.bliond.web.poll;
 
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.TestInstance.*;
-import org.springframework.boot.test.autoconfigure.web.servlet.*;
-import org.springframework.boot.test.context.*;
-import org.springframework.transaction.annotation.*;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @AutoConfigureMockMvc

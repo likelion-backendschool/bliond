@@ -1,19 +1,23 @@
 package com.likelion.bliond.domain.poll.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import com.likelion.bliond.base.BaseEntity;
 import com.likelion.bliond.domain.event.entity.Event;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import net.bytebuddy.implementation.bind.annotation.SuperCall;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @SuperBuilder

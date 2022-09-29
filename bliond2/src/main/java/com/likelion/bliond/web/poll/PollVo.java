@@ -1,12 +1,10 @@
 package com.likelion.bliond.web.poll;
 
-import com.likelion.bliond.domain.poll.entity.PollChoice;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter

@@ -1,20 +1,16 @@
 package com.likelion.bliond.domain.poll.service;
 
-import com.likelion.bliond.domain.event.dto.EventDto;
 import com.likelion.bliond.domain.event.entity.Event;
 import com.likelion.bliond.domain.event.repository.EventRepository;
-import com.likelion.bliond.domain.member.entity.Member;
-import com.likelion.bliond.domain.member.repository.MemberRepository;
 import com.likelion.bliond.domain.poll.dto.PollDto;
 import com.likelion.bliond.domain.poll.entity.Poll;
 import com.likelion.bliond.domain.poll.repository.PollRepository;
 import com.likelion.bliond.web.response.ApiException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
