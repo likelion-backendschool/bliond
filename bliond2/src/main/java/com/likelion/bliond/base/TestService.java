@@ -14,6 +14,7 @@ import com.likelion.bliond.util.JwtDto;
 import com.likelion.bliond.util.TokenService;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
@@ -146,6 +147,16 @@ public class TestService {
         });
 
         return event.getQuestions();
+    }
+
+    public List<Poll> createPoll(Long eventId, int count){
+        Event event1 = eventRepository.findById(eventId).get();
+
+        IntStream.rangeClosed(1, count).forEach(i -> {
+            event1.addPoll("만족도 조사(%d)".formatted(i), "만족도 조사 투표입니다.(%d)".formatted(i), Arrays.asList("만족", "불만족", "덜만족"));
+        });
+
+        return event1.getPolls();
     }
 
 }
