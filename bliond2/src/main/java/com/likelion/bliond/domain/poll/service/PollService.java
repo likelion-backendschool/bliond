@@ -24,13 +24,6 @@ public class PollService {
     private final EventRepository eventRepository;
     private final PollRepository pollRepository;
 
-    /** poll 생성,수정,삭제에 대한 권한 어떻게..?
-     * event를 생성한 사람만 가능한데...
-     * front-end에서 처리?
-     *
-     *
-     * findAll, save만
-     * */
 
     @Transactional
     public void save(Long eventId,String name, String description, List<String>pollChoices) {
@@ -50,6 +43,4 @@ public class PollService {
                 .orElseThrow(() -> new ApiException("Event not found"));
         return event.getPolls().stream().map(poll -> mapper.map(poll, PollDto.class)).toList();
     }
-
-
 }
