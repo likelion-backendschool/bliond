@@ -15,7 +15,7 @@ public class SocketController {
 
     @MessageMapping("/questions/{eventId}")
     public void sendQuestion(@DestinationVariable Long eventId, @Payload MessageQuestion messageQuestion) {
-//        questionService.create(eventId,messageQuestion.getContent(),messageQuestion.getMemberId());
+        questionService.create(eventId,messageQuestion.getContent(),messageQuestion.getMemberId());
         simpMessagingTemplate.convertAndSend("/queue/" + eventId, "question");
     }
 }
