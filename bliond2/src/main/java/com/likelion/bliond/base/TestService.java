@@ -8,6 +8,8 @@ import com.likelion.bliond.domain.member.entity.Member;
 import com.likelion.bliond.domain.member.entity.Role;
 import com.likelion.bliond.domain.member.repository.MemberRepository;
 import com.likelion.bliond.domain.poll.entity.Poll;
+import com.likelion.bliond.domain.question.entity.Question;
+import com.likelion.bliond.domain.question.repository.QuestionRepository;
 import com.likelion.bliond.util.JwtDto;
 import com.likelion.bliond.util.TokenService;
 import java.time.LocalDateTime;
@@ -23,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TestService {
 
+    private final QuestionRepository questionRepository;
     private final MemberRepository memberRepository;
     private final EventRepository eventRepository;
     private final TokenService tokenService;
@@ -70,6 +73,17 @@ public class TestService {
         event.participate(member3);
 
         return event;
+    }
+
+    public List<Question> createQuestion(Event event, int count){
+        Event event1 = eventRepository.findById(event.getId()).get();
+        Member member1 = memberRepository.findByUsername("KAKAO_23456").get();
+
+        IntStream.rangeClosed(1, count).forEach(i -> {
+            event1.addQuestion("궁금합니다.%d".formatted(i), member1);
+        });
+
+        return event.getQuestions();
     }
 
 }

@@ -7,16 +7,16 @@ import static lombok.AccessLevel.PROTECTED;
 import com.likelion.bliond.base.BaseEntity;
 import com.likelion.bliond.domain.event.entity.Event;
 import com.likelion.bliond.domain.member.entity.Member;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import javax.persistence.*;
+
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -44,4 +44,8 @@ public class Question extends BaseEntity {
 
     @ManyToOne(fetch = LAZY)
     private Member member;
+    @Builder.Default
+    @ManyToMany
+    Set<Member> likeCount = new HashSet<>();
+
 }

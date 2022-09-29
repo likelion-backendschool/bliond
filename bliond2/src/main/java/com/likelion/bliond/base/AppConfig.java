@@ -8,8 +8,11 @@ import com.likelion.bliond.domain.event.dto.EventDto;
 import com.likelion.bliond.domain.event.entity.Event;
 import com.likelion.bliond.domain.poll.dto.PollDto;
 import com.likelion.bliond.domain.poll.entity.Poll;
+import com.likelion.bliond.domain.question.dto.QuestionDto;
+import com.likelion.bliond.domain.question.entity.Question;
 import com.likelion.bliond.web.event.EventCreateVo;
 import com.likelion.bliond.web.event.EventVo;
+import com.likelion.bliond.web.question.QuestionVo;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,9 +40,19 @@ public class AppConfig {
             m.map(source -> source.getMemberDto().getNickname(), EventVo::setNickname);
             m.map(EventDto::getParticipants, EventVo::setParticipants);
         });
-        mapper.typeMap(Poll.class, PollDto.class).addMappings(m -> {
-            m.using(new PollChoiceConverter()).map(Poll::getPollChoices, PollDto::setPollChoiceDtos);
 
+        mapper.typeMap(Poll.class, PollDto.class).addMappings(m -> {
+            m.using(new PollChoiceConverter()).map(Poll::getPollChoices, PollDto::setPollChoiceDtos);});
+
+        mapper.typeMap(Question.class, QuestionDto.class).addMappings(m -> {
+            m.map(Question::getMember, QuestionDto::setMemberDto);
+        });
+        mapper.typeMap(QuestionDto.class, QuestionVo.class).addMappings(m -> {
+            m.map(source -> source.getMemberDto().getId(), QuestionVo::setMemberId);
+            m.map(source -> source.getMemberDto().getUsername(), QuestionVo::setUsername);
+            m.map(source -> source.getMemberDto().getNickname(), QuestionVo::setNickname);
+            m.map(source -> source.getMemberDto().getRole(), QuestionVo::setRole);
+            m.map(source -> source.getMemberDto().getEventNickname(), QuestionVo::setEventNickname);
         });
         return mapper;
     }

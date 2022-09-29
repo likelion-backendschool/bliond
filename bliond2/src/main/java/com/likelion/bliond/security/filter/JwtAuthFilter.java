@@ -30,30 +30,33 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
         throws ServletException, IOException {
         String authorization = request.getHeader("Authorization");
-        String token = authorization.substring(7);
+
+        if (authorization != null) {
+            String token = authorization.substring(7);
 
 
-        if (tokenService.verifyToken(token)) {
-            String username = tokenService.getUsername(token);
-            Long id = Long.valueOf(tokenService.getId(token));
-            String nickname = tokenService.getNickname(token);
+            if (tokenService.verifyToken(token)) {
+                String username = tokenService.getUsername(token);
+                Long id = Long.valueOf(tokenService.getId(token));
+                String nickname = tokenService.getNickname(token);
 
-            String authorities = tokenService.getAuthorities(token);
-            Set<GrantedAuthority> grantedAuthorities = new LinkedHashSet<>();
-            grantedAuthorities.add(new SimpleGrantedAuthority(authorities));
+                String authorities = tokenService.getAuthorities(token);
+                Set<GrantedAuthority> grantedAuthorities = new LinkedHashSet<>();
+                grantedAuthorities.add(new SimpleGrantedAuthority(authorities));
 
-            MemberContext memberContext =
-                new MemberContext(username, nickname, id,  grantedAuthorities, null, null);
+                MemberContext memberContext =
+                        new MemberContext(username, nickname, id,  grantedAuthorities, null, null);
 
-            UsernamePasswordAuthenticationToken authentication =
-                UsernamePasswordAuthenticationToken.authenticated(
-                    memberContext,
-                    null,
-                    memberContext.getAuthorities()
-                );
-            SecurityContext context = SecurityContextHolder.createEmptyContext();
-            context.setAuthentication(authentication);
-            SecurityContextHolder.setContext(context);
+                UsernamePasswordAuthenticationToken authentication =
+                        UsernamePasswordAuthenticationToken.authenticated(
+                                memberContext,
+                                null,
+                                memberContext.getAuthorities()
+                        );
+                SecurityContext context = SecurityContextHolder.createEmptyContext();
+                context.setAuthentication(authentication);
+                SecurityContextHolder.setContext(context);
+            }
         }
 
         filterChain.doFilter(request, response);

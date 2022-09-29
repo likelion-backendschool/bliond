@@ -48,9 +48,9 @@ public class Event extends BaseEntity {
 
     @ManyToOne(fetch = LAZY)
     private Member member;
-
-    @OneToMany(mappedBy = "event")
-    private List<Question> questions;
+    @Builder.Default
+    @OneToMany(mappedBy = "event", cascade = PERSIST, orphanRemoval = true)
+    private List<Question> questions = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "event", cascade = PERSIST, orphanRemoval = true)
@@ -74,6 +74,21 @@ public class Event extends BaseEntity {
             .member(member)
             .build();
         this.eventMembers.remove(eventMember);
+    }
+
+    public void addQuestion(String content, Member member){
+        Question question = Question.builder()
+                .event(this)
+                .member(member)
+                .content(content)
+                .build();
+
+        this.questions.add(question);
+    }
+
+    public void removeQuestion(Question question) {
+        this.questions.remove(question);
+        question.setEvent(null);
     }
 
     public void addPoll(String name, String description, List<String> pollChoiceNames) {
