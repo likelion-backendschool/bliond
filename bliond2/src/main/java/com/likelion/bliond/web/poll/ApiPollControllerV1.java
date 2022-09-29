@@ -1,6 +1,8 @@
-package com.likelion.bliond.web.question;
+package com.likelion.bliond.web.poll;
 
+import com.likelion.bliond.domain.poll.service.PollService;
 import com.likelion.bliond.domain.question.service.QuestionService;
+import com.likelion.bliond.web.question.QuestionVo;
 import com.likelion.bliond.web.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -13,17 +15,16 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/event/{eventId}/questions")
-public class ApiQuestionControllerV1 {
-
+@RequestMapping("/api/v1/event/{eventId}/polls")
+public class ApiPollControllerV1 {
     private final ModelMapper mapper;
-    private final QuestionService questionService;
+    private final PollService pollService;
 
     @GetMapping
-    public ApiResponse<QuestionVo> getEvents(@PathVariable Long eventId) {
-        List<QuestionVo> questionVos = questionService.findAllByEventId(eventId).stream().map(questionDto -> mapper.map(questionDto, QuestionVo.class))
+    public ApiResponse<PollVo> getPolls(@PathVariable Long eventId) {
+        List<PollVo> pollVos = pollService.getPolls(eventId).stream().map(pollDto -> mapper.map(pollDto, PollVo.class))
                 .toList();
 
-        return ApiResponse.ok(questionVos);
+        return ApiResponse.ok(pollVos);
     }
 }

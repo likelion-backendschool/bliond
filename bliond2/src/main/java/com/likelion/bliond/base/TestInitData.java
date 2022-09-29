@@ -30,8 +30,6 @@ public class TestInitData {
             String adminUsername = KAKAO + "_" + adminAuthKey;
             String adminNickname = "admin1";
 
-            Long memberId = Long.valueOf(1);
-            int count = 1;
 
 
             testService.createUser(userUsername, userNickname, ROLE_USER, userAuthKey);
@@ -39,8 +37,9 @@ public class TestInitData {
             testService.createUser(user3Username, user3Nickname, ROLE_USER, user3AuthKey);
             testService.createUser(adminUsername, adminNickname, ROLE_ADMIN, adminAuthKey);
             testService.createEventMember();
-            Event event = testService.createEvent(memberId, count).get(0);
+            Event event = testService.createEvent(Long.valueOf(1), 4).get(0);
             testService.createQuestion(event, 10);
+            testService.createPoll(event.getId(), 3);
         };
     }
 }

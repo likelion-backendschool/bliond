@@ -19,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.likelion.bliond.domain.poll.entity.Poll;
 import com.likelion.bliond.domain.question.entity.Question;
 import lombok.Builder;
 import lombok.Getter;
@@ -53,6 +54,10 @@ public class Event extends BaseEntity {
 
     @Builder.Default
     @OneToMany(mappedBy = "event", cascade = PERSIST, orphanRemoval = true)
+    private List<Poll> polls = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "event", cascade = PERSIST, orphanRemoval = true)
     private Set<EventMember> eventMembers = new HashSet<>();
 
     public void participate(Member member) {
@@ -84,5 +89,18 @@ public class Event extends BaseEntity {
     public void removeQuestion(Question question) {
         this.questions.remove(question);
         question.setEvent(null);
+    }
+
+    public void addPoll(String name, String description, List<String> pollChoiceNames) {
+        Poll poll = Poll.builder()
+                .name(name)
+                .description(description)
+                .event(this)
+                .isActive(true)
+                .build();
+
+        pollChoiceNames.forEach(poll::addPollChoice);
+
+        this.polls.add(poll);
     }
 }

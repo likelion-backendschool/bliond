@@ -6,6 +6,7 @@ import com.likelion.bliond.domain.member.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QuestionDto {
+    private LocalDateTime createdDate;
+    private LocalDateTime modifiedDate;
     private Long id;
     private String content;
     private MemberDto memberDto;
