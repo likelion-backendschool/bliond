@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/events/{eventId}/questions")
+@RequestMapping("/api/v1/event/{eventId}/questions")
 public class ApiQuestionControllerV1 {
 
     private final ModelMapper mapper;
