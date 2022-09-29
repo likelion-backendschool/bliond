@@ -8,6 +8,7 @@ import com.likelion.bliond.base.BaseEntity;
 import com.likelion.bliond.base.BooleanToYNConverter;
 import com.likelion.bliond.domain.member.entity.Member;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.likelion.bliond.domain.poll.entity.Poll;
 import com.likelion.bliond.domain.question.entity.Question;
 import lombok.Builder;
 import lombok.Getter;
@@ -52,6 +54,10 @@ public class Event extends BaseEntity {
 
     @Builder.Default
     @OneToMany(mappedBy = "event", cascade = PERSIST, orphanRemoval = true)
+    private List<Poll> polls = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "event", cascade = PERSIST, orphanRemoval = true)
     private Set<EventMember> eventMembers = new HashSet<>();
 
     public void participate(Member member) {
@@ -68,5 +74,18 @@ public class Event extends BaseEntity {
             .member(member)
             .build();
         this.eventMembers.remove(eventMember);
+    }
+
+    public void addPoll(String name, String description, List<String> pollChoiceNames) {
+        Poll poll = Poll.builder()
+                .name(name)
+                .description(description)
+                .event(this)
+                .isActive(true)
+                .build();
+
+        pollChoiceNames.forEach(poll::addPollChoice);
+
+        this.polls.add(poll);
     }
 }

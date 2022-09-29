@@ -1,6 +1,11 @@
 spring:
+  datasource:
+    url: jdbc:mariadb://127.0.0.1:3306/bliond2?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
+    username: root
+    password: codnjs12479
+    driver-class-name: org.mariadb.jdbc.Driver
   jpa:
-#    database-platform: org.hibernate.dialect.MariaDB53Dialect
+    database-platform: org.hibernate.dialect.MariaDB53Dialect
     properties:
       hibernate:
         show_sql: true

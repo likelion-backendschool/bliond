@@ -30,7 +30,7 @@ public class TestInitData {
             String adminNickname = "admin1";
 
             Long memberId = Long.valueOf(1);
-            int count = 1;
+            int count = 3;
 
 
             testService.createUser(userUsername, userNickname, ROLE_USER, userAuthKey);

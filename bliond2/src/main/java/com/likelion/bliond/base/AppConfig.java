@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.likelion.bliond.domain.event.dto.EventDto;
 import com.likelion.bliond.domain.event.entity.Event;
+import com.likelion.bliond.domain.poll.dto.PollDto;
+import com.likelion.bliond.domain.poll.entity.Poll;
 import com.likelion.bliond.web.event.EventCreateVo;
 import com.likelion.bliond.web.event.EventVo;
 import org.modelmapper.ModelMapper;
@@ -34,6 +36,10 @@ public class AppConfig {
             m.map(source -> source.getMemberDto().getUsername(), EventVo::setUsername);
             m.map(source -> source.getMemberDto().getNickname(), EventVo::setNickname);
             m.map(EventDto::getParticipants, EventVo::setParticipants);
+        });
+        mapper.typeMap(Poll.class, PollDto.class).addMappings(m -> {
+            m.using(new PollChoiceConverter()).map(Poll::getPollChoices, PollDto::setPollChoiceDtos);
+
         });
         return mapper;
     }
