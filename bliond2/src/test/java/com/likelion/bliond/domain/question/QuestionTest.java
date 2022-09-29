@@ -50,16 +50,9 @@ class QuestionTest {
         Member member1 = memberRepository.findByUsername("KAKAO_23456").get();
         Event event = testService.createEvent(member.getId(), 1).get(0);
 
-        Question question = Question.builder()
-                .content("궁금합니다.")
-                .event(event)
-                .member(member1)
-                .build();
-        Question savedQuestion = questionRepository.save(question);
+        event.addQuestion("궁금합니다.", member1);
 
-        Question findQuestion = questionRepository.findById(savedQuestion.getId()).get();
-
-        assertThat(findQuestion.getContent()).isEqualTo(question.getContent());
+        assertThat(event.getQuestions().size()).isEqualTo(1);
     }
 
     @Test

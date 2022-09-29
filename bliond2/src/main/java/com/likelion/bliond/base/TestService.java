@@ -76,10 +76,11 @@ public class TestService {
     }
 
     public List<Question> createQuestion(Event event, int count){
+        Event event1 = eventRepository.findById(event.getId()).get();
         Member member1 = memberRepository.findByUsername("KAKAO_23456").get();
 
         IntStream.rangeClosed(1, count).forEach(i -> {
-            event.addQuestion("궁금합니다.%d".formatted(i), member1);
+            event1.addQuestion("궁금합니다.%d".formatted(i), member1);
         });
 
         return event.getQuestions();
