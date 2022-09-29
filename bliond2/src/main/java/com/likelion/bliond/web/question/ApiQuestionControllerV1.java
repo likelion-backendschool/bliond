@@ -20,7 +20,7 @@ public class ApiQuestionControllerV1 {
     private final QuestionService questionService;
 
     @GetMapping
-    public ApiResponse<QuestionVo> getEvents(@PathVariable Long eventId) {
+    public ApiResponse<QuestionVo> getQuestions(@PathVariable Long eventId) {
         List<QuestionVo> questionVos = questionService.findAllByEventId(eventId).stream().map(questionDto -> mapper.map(questionDto, QuestionVo.class))
                 .toList();
 
