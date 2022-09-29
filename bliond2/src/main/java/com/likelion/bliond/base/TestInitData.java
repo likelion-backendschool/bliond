@@ -4,6 +4,7 @@ import static com.likelion.bliond.domain.member.entity.AuthType.KAKAO;
 import static com.likelion.bliond.domain.member.entity.Role.ROLE_ADMIN;
 import static com.likelion.bliond.domain.member.entity.Role.ROLE_USER;
 
+import com.likelion.bliond.domain.event.entity.Event;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,7 +39,8 @@ public class TestInitData {
             testService.createUser(user3Username, user3Nickname, ROLE_USER, user3AuthKey);
             testService.createUser(adminUsername, adminNickname, ROLE_ADMIN, adminAuthKey);
             testService.createEventMember();
-            testService.createEvent(memberId,count);
+            Event event = testService.createEvent(memberId, count).get(0);
+            testService.createQuestion(event, 10);
         };
     }
 }

@@ -8,6 +8,7 @@ import com.likelion.bliond.base.BaseEntity;
 import com.likelion.bliond.base.BooleanToYNConverter;
 import com.likelion.bliond.domain.member.entity.Member;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -46,9 +47,9 @@ public class Event extends BaseEntity {
 
     @ManyToOne(fetch = LAZY)
     private Member member;
-
-    @OneToMany(mappedBy = "event")
-    private List<Question> questions;
+    @Builder.Default
+    @OneToMany(mappedBy = "event", cascade = PERSIST, orphanRemoval = true)
+    private List<Question> questions = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "event", cascade = PERSIST, orphanRemoval = true)
@@ -68,5 +69,20 @@ public class Event extends BaseEntity {
             .member(member)
             .build();
         this.eventMembers.remove(eventMember);
+    }
+
+    public void addQuestion(String content, Member member){
+        Question question = Question.builder()
+                .event(this)
+                .member(member)
+                .content(content)
+                .build();
+
+        this.questions.add(question);
+    }
+
+    public void removeQuestion(Question question) {
+        this.questions.remove(question);
+        question.setEvent(null);
     }
 }
