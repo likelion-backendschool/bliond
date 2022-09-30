@@ -8,6 +8,9 @@ import com.likelion.bliond.domain.member.repository.MemberRepository;
 import com.likelion.bliond.domain.poll.dto.PollDto;
 import com.likelion.bliond.domain.poll.repository.PollRepository;
 import com.likelion.bliond.domain.poll.service.PollService;
+import java.util.Arrays;
+import java.util.List;
+import javax.transaction.Transactional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -15,10 +18,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-
-import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.List;
 
 
 @SpringBootTest

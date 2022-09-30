@@ -3,8 +3,11 @@ package com.likelion.bliond.domain.event.dto;
 import com.likelion.bliond.domain.member.dto.MemberDto;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter

@@ -1,28 +1,24 @@
 package com.likelion.bliond.domain.poll;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.likelion.bliond.base.TestService;
 import com.likelion.bliond.domain.event.entity.Event;
 import com.likelion.bliond.domain.event.repository.EventRepository;
 import com.likelion.bliond.domain.member.entity.Member;
 import com.likelion.bliond.domain.member.repository.MemberRepository;
 import com.likelion.bliond.domain.poll.entity.Poll;
-import com.likelion.bliond.domain.poll.entity.PollChoice;
 import com.likelion.bliond.domain.poll.repository.PollRepository;
+import java.util.ArrayList;
+import java.util.List;
+import javax.transaction.Transactional;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-
-import javax.transaction.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @Transactional
 @SpringBootTest

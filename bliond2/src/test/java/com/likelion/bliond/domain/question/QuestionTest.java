@@ -1,5 +1,8 @@
 package com.likelion.bliond.domain.question;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.TestInstance.Lifecycle;
+
 import com.likelion.bliond.base.TestService;
 import com.likelion.bliond.domain.event.entity.Event;
 import com.likelion.bliond.domain.event.repository.EventRepository;
@@ -7,21 +10,14 @@ import com.likelion.bliond.domain.member.entity.Member;
 import com.likelion.bliond.domain.member.repository.MemberRepository;
 import com.likelion.bliond.domain.question.entity.Question;
 import com.likelion.bliond.domain.question.repository.QuestionRepository;
-import org.assertj.core.api.Assertions;
+import java.util.List;
+import javax.transaction.Transactional;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-
-import javax.transaction.Transactional;
-
-import java.util.List;
-
-import static com.likelion.bliond.domain.member.entity.AuthType.KAKAO;
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.TestInstance.*;
 
 @Transactional
 @SpringBootTest

@@ -7,6 +7,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 import com.likelion.bliond.base.BaseEntity;
 import com.likelion.bliond.base.BooleanToYNConverter;
 import com.likelion.bliond.domain.member.entity.Member;
+import com.likelion.bliond.domain.poll.entity.Poll;
+import com.likelion.bliond.domain.question.entity.Question;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,9 +20,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import com.likelion.bliond.domain.poll.entity.Poll;
-import com.likelion.bliond.domain.question.entity.Question;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
