@@ -36,10 +36,9 @@ public class TestInitData {
             testService.createUser(user2Username, user2Nickname, ROLE_USER, user2AuthKey);
             testService.createUser(user3Username, user3Nickname, ROLE_USER, user3AuthKey);
             testService.createUser(adminUsername, adminNickname, ROLE_ADMIN, adminAuthKey);
-            testService.createEventMember();
-            Event event = testService.createEvent(Long.valueOf(1), 4).get(0);
+            Event event = testService.createEventMember();
             testService.createQuestion(event, 10);
-            testService.createPoll(event.getId(), 3);
+            testService.createPoll(event, 3);
         };
     }
 }

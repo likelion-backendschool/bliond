@@ -50,17 +50,27 @@ public class TestService {
     public List<Event> createEvent(Long memberId, int count) {
         Member member = memberRepository.findById(memberId).get();
         List<Event> events = new ArrayList<>();
-        IntStream.rangeClosed(1, count).forEach(i -> {
+
             Event event = Event.builder()
                 .endDateTime(LocalDateTime.now())
-                .title("title" + i)
-                .description("content" + i)
+                .title("! Bliond !")
+                .description("bliond의 첫번째 이벤트 생성입니다.")
                 .isPrivate(false)
                 .member(member)
                 .build();
             events.add(eventRepository.save(event));
-        });
 
+        Event event2 = Event.builder()
+                .endDateTime(LocalDateTime.now())
+                .title("[React] 리액트 첫걸음")
+                .description("""
+                        React로 구현하는 웹사이트.
+                        기초부터 튼튼하게
+                        """)
+                .isPrivate(false)
+                .member(member)
+                .build();
+        events.add(eventRepository.save(event2));
         return events;
     }
 
@@ -79,78 +89,50 @@ public class TestService {
     public List<Question> createQuestion(Event event, int count){
         Event event1 = eventRepository.findById(event.getId()).get();
         Member member1 = memberRepository.findByUsername("KAKAO_23456").get();
-
-        IntStream.rangeClosed(1, count).forEach(i -> {
-            event1.addQuestion("""
-                    # 제목
-                    ```java 
-                    public class Main {
-                            
-                        static List<List<Integer>> graph;
-                        static boolean[] visited;
-                        static long[] fee;
-                        static int n;
-                            
-                        static long sum;
-                            
-                        public static void main(String[] args) throws IOException {
-                            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                            StringTokenizer st = new StringTokenizer(br.readLine());
-                            n = Integer.parseInt(st.nextToken());
-                            int m = Integer.parseInt(st.nextToken());
-                            long k = Long.parseLong(st.nextToken());
-                            fee = new long[n + 1];
-                            st = new StringTokenizer(br.readLine());
-                            for (int i = 1; i <= n; i++) {
-                                fee[i] = Long.parseLong(st.nextToken());
-                            }
-                            graph = new ArrayList<>();
-                            graph.add(null);
-                            for (int i = 0; i < n; i++) {
-                                graph.add(new LinkedList<>());
-                            }
-                            for (int i = 0; i < m; i++) {
-                                st = new StringTokenizer(br.readLine());
-                                int from = Integer.parseInt(st.nextToken());
-                                int to = Integer.parseInt(st.nextToken());
-                                graph.get(from).add(to);
-                                graph.get(to).add(from);
-                            }
-                            visited = new boolean[n + 1];
-                            long answer = 0;
-                            sum = Integer.MAX_VALUE;
-                            for (int i = 1; i <= n; i++) {
-                                if (!visited[i]) {
-                                    dfs(i);
-                                    answer += sum;
+        event1.addQuestion("""
+                       ## Welcome to Bliond
+                       
+                       Bliond는 여러분의 **무한한 궁금증 해결**을 위한 공간입니다.
+                       질문은 쉽게, 그리고 답변과 피드백은 진중하게. 여러분의 귀중한 학습경험을 위해 도와드리겠습니다.
+                       
+                               ```
+                               
+                               console.log('Welcome to Bliond!');
+                               
+                                ```  
+                    """, member1);
+            event1.addQuestion(
+                       """
+                       
+                       ## Bliond
+                       
+                               ```
+                               
+                               import React, {useState} from 'react';
+                                    ...
+                                   
+                               const Bliond = () => {
+                                    const [smile, setSmile] = useState(false);
+                                   	const comeIn = () -> {
+                                   		setSmile(true);
+                                   		console.log('smile이 on 되었습니다.');
+                                   	}
+                                   	return(
+                                   		<button onClick={comeIn} > 참여하시겠습니까? </button>
+                                   	);
                                 }
-                            }
-                            if (answer <= k) {
-                                System.out.println(answer);
-                            } else {
-                                System.out.println("Oh no");
-                            }
-                        }
-                        public static void dfs(int cur) {
-                            visited[cur] = true;
-                            sum = Math.min(sum, fee[cur]);
-                            for (int next : graph.get(cur)) {
-                                if (visited[next]) {
-                                    continue;
-                                }
-                                dfs(next);
-                            }
-                        }
-                    }
+                                
                                 ```
-                    """.formatted(i), member1);
-        });
+                                
+                    """
+                    , member1);
+
 
         return event.getQuestions();
     }
 
-    public List<Poll> createPoll(Long eventId, int count){
-        Event event1 = eventRepository.findById(eventId).get();
+    public List<Poll> createPoll(Event event, int count){
+        Event event1 = eventRepository.findById(event.getId()).get();
 
         IntStream.rangeClosed(1, count).forEach(i -> {
             event1.addPoll("만족도 조사(%d)".formatted(i), "만족도 조사 투표입니다.(%d)".formatted(i), Arrays.asList("만족", "불만족", "덜만족"));
